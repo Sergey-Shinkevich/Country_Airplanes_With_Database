@@ -40,4 +40,3 @@ def test_from_api_invalid_data() -> None:
     # Нужно передать страну, так как это обязательный аргумент
     assert Airplane.from_api([], "Germany") is None
     assert Airplane.from_api(["short"], "Germany") is None
-

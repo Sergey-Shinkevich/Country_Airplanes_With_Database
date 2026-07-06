@@ -1,9 +1,9 @@
-from typing import Any, Optional
+from typing import Optional
 
 
 class Airplane:
     def __init__(self, icao24: str, country: str, callsign: str, velocity: float):
-
+        """Конструктор"""
         # ICAO24 - уникальный ключ
         self.icao24 = icao24
 
@@ -19,9 +19,8 @@ class Airplane:
         # Валидация скорости
         self.velocity = float(velocity) if velocity is not None else 0.0
 
-
     @classmethod
-    def from_api(cls, state: list, country_name: str) -> Optional['Airplane']:
+    def from_api(cls, state: list, country_name: str) -> Optional["Airplane"]:
         """
         Передаем country_name принудительно, так как мы сами выбираем страну через Nominatim.
         """
@@ -31,5 +30,5 @@ class Airplane:
             icao24=str(state[0]),
             country=country_name,  # Берем страну из того запроса, который сделали
             callsign=state[1],
-            velocity=state[9]
+            velocity=state[9],
         )
