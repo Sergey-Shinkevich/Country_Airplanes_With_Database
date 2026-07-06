@@ -76,14 +76,14 @@ class AirTrafficAPI(APIClient):
             states = data.get("states")
 
             if states:
-                # Создаем объекты и передаем country. Сразу отфильтровываем None
-                new_planes = [
-                    Airplane.from_api(s, country)
-                    for s in states
-                    if Airplane.from_api(s, country) is not None
-                ]
-                # Добавляем самолеты в общий список
+                new_planes = []
+                for s in states:
+                    plane = Airplane.from_api(s, country)
+                    if plane is not None:
+                        new_planes.append(plane)
+
                 self.airplanes.extend(new_planes)
+
                 print(f"[{country}] Добавлено самолетов: {len(new_planes)}")
             else:
                 print(f"[{country}] Самолеты на данной территории не найдены.")
